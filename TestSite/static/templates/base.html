@@ -20,6 +20,15 @@
     <!-- Custom Fonts -->
     <link href="/static/sb-admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- jQuery -->
+    <script src="/static/jquery/jquery-1.11.2.min.js"></script>
+    {% block extrajs %}{% endblock %}
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/sb-admin/js/bootstrap.min.js"></script>
+    
+    <!-- High Charts -->
+    {% block highcharts_loader %}{% endblock %}
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -50,15 +59,6 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="/static/jquery/jquery-1.11.2.min.js"></script>
-    {% block extrajs %}{% endblock %}
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/static/sb-admin/js/bootstrap.min.js"></script>
-    
-    <!-- High Charts -->
-    {% block highcharts_loader %}{% endblock %}
     
 </body>
 

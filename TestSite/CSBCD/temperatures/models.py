@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.encoding import smart_unicode
+import time
 
 class Temperature(models.Model):
     timestamp =  models.DateTimeField(auto_now_add = True, auto_now = False)
@@ -8,5 +9,15 @@ class Temperature(models.Model):
     def __unicode__(self):
         return smart_unicode(self.timestamp)
 
-    def tempF(self):
+    def get_tempF(self):
         return self.value
+
+    def get_tempC(self):
+        return (self.value - 32)  * 5.0 / 9.0
+
+    def get_tempK(self):
+        return (self.value + 459.67) * 5.0 / 9.0
+
+    def get_epoch(self):
+        return int(time.mktime(self.timestamp.timetuple()))
+        

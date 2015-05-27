@@ -1,25 +1,35 @@
+$(function() {
+    var tempF = {
+        name: 'Temperature (F)',
+        data: [],
+    } 
 
-$(document).ready(function() {
-    var tempFOptions = {
-        chart: {
-            renderTo: 'temperature',
-            type: 'line',
-        },
-        legend: {enabled: false},
-        title: {text: 'Temperature Over Time'},
-        subtitle: {text: ''},
-        xAxis: {title: {text: ''}, labels: {rotation: -45}},
-        yAxis: {title: {text: ''}},
-        series: [{}],
-    }
-
-    var chartDataUrl = "{% url 'chart_data_json' %}";
-    $.getJSON(chartDataUrl,
-        function(data) {
-            console.log(data);
-            tempFOptions.xAxis.categories = data['chart_data']['dates'];
-            tempFOptions.series[0].name = 'Temperatures';
-            tempFOptions.series[0].data = data['chart_data']['values'];
-            var chart = new Highcharts.Chart(tempFOptions);
+    $.getJSON("/temperature_json", function(data) { 
+        $.each(data, function(key, value) {
+            $.each(value, function(k, v) {
+                if(key == 'timestamp') {
+                    tempF.data.push([(v * 1000)]);
+                }
+                else {
+                    tempF.data[k].push(parseFloat(v));
+                }
+            });
         });
+        
+        $('#temperature').highcharts({
+            chart: {
+                title: 'Temperature Over Time',
+                type: 'line',
+            },
+            xAxis: {
+                type: 'datetime',
+            },
+            yAxis: {
+            },
+            series: [{
+                name: tempF.name,
+                data: tempF.data,
+            }],
+        });
+    });
 });

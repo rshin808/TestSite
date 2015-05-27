@@ -13,8 +13,9 @@ urlpatterns = patterns('',
     url(r'^signup', 'signups.views.join', name = 'signup'),
     url(r'^chart', 'charts.views.chart', name = 'chart'),
     url(r'^table', 'tables.views.table', name = 'table'),
-    url(r'^chart_data_json', 'temperatures.views.chart_data_json', name = 'chart_data_json'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^ajax/', 'dashboards.views.ajax'),
+    url(r'^temperature_json/', 'dashboards.views.ajax'),
 )
 
 if settings.DEBUG:
