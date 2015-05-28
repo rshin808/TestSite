@@ -9,12 +9,18 @@ def home(request):
 def temperatures(request):
     response_data = {
         'timestamp' : [],
-        'value' : [],
+        'value' : {
+                    'tempF': [],
+                    'tempC': [],
+                    'tempK': [],    
+                  },
     }
     temperatures = Temperature.objects.all()
 
-    for tempF in temperatures:
-        response_data['timestamp'].append(tempF.get_epoch())
-        response_data['value'].append(tempF.get_tempF())
+    for temperature in temperatures:
+        response_data['timestamp'].append(temperature.get_epoch())
+        response_data['value']['tempF'].append(temperature.get_tempF())
+        response_data['value']['tempC'].append(temperature.get_tempC())
+        response_data['value']['tempK'].append(temperature.get_tempK())
     
     return JsonResponse(response_data) 

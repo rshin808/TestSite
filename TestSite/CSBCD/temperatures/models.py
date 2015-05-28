@@ -13,10 +13,10 @@ class Temperature(models.Model):
         return self.value
 
     def get_tempC(self):
-        return (self.value - 32.0) * 5.0 / 9.0
+        return float("%.3f" % ((float(self.value) - 32.0) * 5.0 / 9.0))
 
     def get_tempK(self):
-        return (self.value + 459.67) * 5.0 / 9.0
+        return float("%.3f" % ((float(self.value) + 459.67) * 5.0 / 9.0))
 
     def get_epoch(self):
         return int(time.mktime(self.timestamp.timetuple()) * 1000)
